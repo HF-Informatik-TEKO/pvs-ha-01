@@ -11,7 +11,7 @@ public class RoundRobin {
     public void execute() {
         var system = new SystemSimulation();
         var cpu = new CPUSimulation();
-        var processes = new ProcessList();
+        var processes = new ProcessList<ProcessSimulation>();
         processes.add(new ProcessSimulation(800));
         processes.add(new ProcessSimulation(100));
         processes.add(new ProcessSimulation(200));

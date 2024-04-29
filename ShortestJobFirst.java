@@ -8,7 +8,7 @@ public class ShortestJobFirst {
     public void execute() {
         var system = new SystemSimulation();
         var cpu = new CPUSimulation();
-        var processes = new ProcessList();
+        var processes = new ProcessList<ProcessSimulation>();
         processes.add(new ProcessSimulation(800));
         processes.add(new ProcessSimulation(100));
         processes.add(new ProcessSimulation(200));
@@ -38,7 +38,7 @@ public class ShortestJobFirst {
         system.shutdownSystem();
     }
     
-    private ProcessSimulation getNextProcessOrNull(ProcessList processes) {
+    private ProcessSimulation getNextProcessOrNull(ProcessList<ProcessSimulation> processes) {
         if (processes.size() <= 0) {
             return null;
         }
@@ -47,7 +47,7 @@ public class ShortestJobFirst {
         return getShortestJob(processes);
     }
 
-    private void removeFinishedJobs(ProcessList processes) {
+    private void removeFinishedJobs(ProcessList<ProcessSimulation> processes) {
         for (int i = processes.size() - 1; i > 0; i--) {
             var p = processes.get(i);
             if (p.isFinished()){
@@ -56,7 +56,7 @@ public class ShortestJobFirst {
         }
     }
 
-    private ProcessSimulation getShortestJob(ProcessList processes) {
+    private ProcessSimulation getShortestJob(ProcessList<ProcessSimulation> processes) {
         var min = Integer.MAX_VALUE;
         var shortestDuration = processes.get(0);
         for (var p : processes) {
